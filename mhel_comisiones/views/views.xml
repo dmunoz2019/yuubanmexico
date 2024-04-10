@@ -1,0 +1,242 @@
+<odoo>
+  <data>
+
+    <!-- Adición de campos anfitrion e invitados al formulario de res.partner -->
+    <record id="view_comisiones_red_form" model="ir.ui.view">
+      <field name="name">res.partner.form.ext</field>
+      <field name="model">res.partner</field>
+      <field name="inherit_id" ref="base.view_partner_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//page[@name='internal_notes']" position="after">
+          <page name="comisiones_red_page" string="Red de comisiones">
+            <group>
+              <group>
+                <field name="anfitrion_id" />
+              </group>
+            </group>
+            <group>
+              <field name="invitado_ids" widget="one2many" context="{'show_attribute': False}">
+                <tree string="Invitados" editable="bottom" create="false" delete="false">
+                  <field name="vat" />
+                  <field name="name"/>
+                </tree>
+              </field>
+            </group>
+          </page>
+        </xpath>
+      </field>
+    </record>
+
+    <!-- Vista formulario wizard que realiza proceso de calculo de comisiones -->
+    <record model="ir.ui.view" id="comisiones_wizard_form">
+      <field name="name">comisiones.wizard.form</field>
+      <field name="model">comisiones.wizard</field>
+      <field name="arch" type="xml">
+        <form string="Comisiones">
+          <group>
+            <field name="partner_ids">
+              <tree>
+                <field name="ref" />
+                <field name="name" />
+                <field name="email" />
+              </tree>
+            </field>
+          </group>
+          <footer>
+            <button type="object" id="action_calcular_niveles" name="action_calcular_niveles" class="btn-primary" string="Calcular comisiones" />
+            <button type="object" id="action_exit" name="action_exit" class="btn-default" string="Cerrar" />
+          </footer>
+        </form>
+      </field>
+    </record>
+
+    <!-- Vista formulario wizard que realiza proceso de liquidacion de comisiones -->
+    <record model="ir.ui.view" id="comisiones_liquidacion_wizard_form">
+      <field name="name">comisiones.liquidacion.wizard.form</field>
+      <field name="model">comisiones.liquidacion.wizard</field>
+      <field name="arch" type="xml">
+        <form string="Comisiones">
+          <group>
+            <field name="partner_ids">
+              <tree>
+                <field name="ref" />
+                <field name="name" />
+                <field name="email" />
+              </tree>
+            </field>
+          </group>
+          <footer>
+            <button type="object" id="action_liquidar_comisiones" name="action_liquidar_comisiones" class="btn-primary" string="Liquidar comisiones" />
+            <button type="object" id="action_exit" name="action_exit" class="btn-default" string="Cerrar" />
+          </footer>
+        </form>
+      </field>
+    </record>
+
+    <!--<record id="sale_order_line_ext" model="ir.ui.view">
+      <field name="name">Linea comisionable</field>
+      <field name="model">sale.order</field>
+      <field name="inherit_id" ref="sale.view_order_form" />
+      <field name="arch" type="xml">
+        <xpath expr="//page/field[@name='order_line']/tree/field[@name='name']" position="after">
+          <field name="is_comisionable" />
+        </xpath>
+        <xpath expr="//button[@name='action_cancel']" position="after">
+          <button type='object' id='generar_reporte_pdf' name='generar_reporte_pdf' class='Resumen PDF' string='Generar Reporte PDF Unido' />
+        </xpath>
+      </field>
+    </record>-->
+
+    <record id="sale_order_ext" model="ir.ui.view">
+      <field name="name">Valor total comisionable</field>
+      <field name="model">sale.order</field>
+      <field name="inherit_id" ref="sale.view_order_form" />
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='tax_totals_json']" position="after">
+          <field name="val_comisionable" widget='monetary' options="{'currency_field': 'company_id.currency_id'}" />
+        </xpath>
+      </field>
+    </record>
+
+    <record id="view_form_product_template_inherit" model="ir.ui.view">
+      <field name="name">Producto comisionable</field>
+      <field name="model">product.template</field>
+      <field name="inherit_id" ref="product.product_template_form_view"/>
+      <field name="arch" type="xml">
+        <page name="inventory" position="after">
+          <page name="mhel_comisiones" string="Comisiones">
+            <group>
+              <group>
+                <field name="is_comisionable"/>
+              </group>
+            </group>
+          </page>
+        </page>
+      </field>
+    </record>
+
+    <record id="comisiones_wizard_action" model="ir.actions.act_window">
+      <field name="name">Comisiones</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">comisiones.wizard</field>
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="comisiones_wizard_form"></field>
+      <field name="target">new</field>
+    </record>
+
+    <record id="comisiones_liquidacion_wizard_action" model="ir.actions.act_window">
+      <field name="name">Comisiones</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">comisiones.liquidacion.wizard</field>
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="comisiones_liquidacion_wizard_form"></field>
+      <field name="target">new</field>
+    </record>
+
+    <record id="action_comisiones_comision" model="ir.actions.act_window">
+      <field name="name">Comisiones</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">comisiones.comision</field>
+      <field name="view_mode">tree</field>
+      <field name="context">{}</field>
+      <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+                        Ver comisiones
+        </p>
+        <p>
+                        Sin mensaje... 
+        </p>
+      </field>
+    </record>
+
+    <record id="comisiones_comision_tree" model="ir.ui.view">
+      <field name="name">comisiones.comision.tree</field>
+      <field name="model">comisiones.comision</field>
+      <field name="priority">1</field>
+      <field name="arch" type="xml">
+        <tree string="Comisiones" editable="top">
+          <field name="partner_id" readonly="1" />
+          <field name="date_start" readonly="1" />
+          <field name="date_end" readonly="1" />
+          <field name="amount_comision" readonly="1" />
+          <field name="por_comision" readonly="1" />
+          <field name="val_comision" readonly="1" />
+          <field name="nivel" readonly="1" />
+          <field name="state" readonly="1" />
+          <field name="partner_ori_id" readonly="1"  optional="hide" />
+          <field name="date_liquidacion" readonly="1" />
+          <field name="liquidador_id" readonly="1" />
+          
+        </tree>
+      </field>
+    </record>
+
+    <record id="action_comisiones_porcentaje" model="ir.actions.act_window">
+      <field name="name">Comisiones</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">comisiones.porcentaje</field>
+      <field name="view_mode">tree</field>
+      <field name="context">{}</field>
+      <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+                        Ver porcentajes comisiones
+        </p>
+        <p>
+                        Sin mensaje... 
+        </p>
+      </field>
+    </record>
+
+    <record id="comisiones_porcentaje_tree" model="ir.ui.view">
+      <field name="name">comisiones.porcentaje.tree</field>
+      <field name="model">comisiones.porcentaje</field>
+      <field name="priority">1</field>
+      <field name="arch" type="xml">
+        <tree string="Porcentajes comisiones" editable="top">
+          <field name="subnivel" />
+          <field name="por_comision" />
+        </tree>
+      </field>
+    </record>
+
+    <record id="action_comisiones_periodo" model="ir.actions.act_window">
+      <field name="name">Comisiones</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">comisiones.periodo</field>
+      <field name="view_mode">tree</field>
+      <field name="context">{}</field>
+      <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+                        Ver peiriodos de comisiones
+        </p>
+        <p>
+                        Sin mensaje... 
+        </p>
+      </field>
+    </record>
+
+    <record id="comisiones_periodo_tree" model="ir.ui.view">
+      <field name="name">comisiones.periodo.tree</field>
+      <field name="model">comisiones.periodo</field>
+      <field name="priority">1</field>
+      <field name="arch" type="xml">
+        <tree string="Periodos de comisiones" editable="top">
+          <field name="name" />
+          <field name="amount_meta" />
+          <field name="date_start" />
+          <field name="date_end" />
+          <field name="active" />
+        </tree>
+      </field>
+    </record>
+
+    <menuitem id="comisiones_ventas_gen" name="Comisiones" parent="sale.sale_menu_root" sequence="50" />
+    <menuitem id="comisiones_ventas_cal" name="Calcular comisiones" parent="comisiones_ventas_gen" action="comisiones_wizard_action" sequence="200" />
+    <menuitem id="comisiones_ventas_liq" name="Liquidar comisiones" parent="comisiones_ventas_gen" action="comisiones_liquidacion_wizard_action" sequence="200" />
+    <menuitem id="comisiones_ventas_lis" name="Comisiones" parent="comisiones_ventas_gen" action="action_comisiones_comision" sequence="200" />
+    <menuitem id="comisiones_ventas_por" name="Porcentajes comisiones" parent="comisiones_ventas_gen" action="action_comisiones_porcentaje" sequence="200" />
+    <menuitem id="comisiones_ventas_per" name="Periodos de comisiones" parent="comisiones_ventas_gen" action="action_comisiones_periodo" sequence="200" />
+
+
+  </data>
+</odoo>

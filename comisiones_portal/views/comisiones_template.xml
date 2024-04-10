@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template id="comisiones_template" name="Mi Red">
+        <t t-call="portal.portal_layout">
+            <div class="table-responsive border rounded border-top-0" style="background-color: white;">
+                <div style="padding-top: 15px; font-size: 14px;">
+                    <div style="padding: 0 25px 0 25px;">
+                        <div class="text-center" style="font-size: 18px;">
+                            <div t-if="total_nivel1_comisionable">
+                                <div>
+                                    <span>Nivel 1:</span>
+                                </div>
+                                <div>
+                                    <span>Valor comisionable: $ </span>
+                                    <t t-esc="'{:,.2f}'.format(total_nivel1_comisionable)"/>
+                                </div>
+                                <div>
+                                    <span>Valor comisión: $ </span>
+                                    <t t-esc="'{:,.2f}'.format(total_nivel1_comision)"/>
+                                </div>
+                                <hr/>
+                            </div>
+                            <div t-if="total_nivel2_comisionable">
+                                <div>
+                                    <span>Nivel 2:</span>
+                                </div>
+                                <div>
+                                    <span>Valor comisionable: $ </span>
+                                    <t t-esc="'{:,.2f}'.format(total_nivel2_comisionable)"/>
+                                </div>
+                                <div>
+                                    <span>Valor comisión: $ </span>
+                                    <t t-esc="'{:,.2f}'.format(total_nivel2_comision)"/>
+                                </div>
+                                <hr/>
+                            </div>
+                            <div t-if="total_nivel3_comisionable">
+                                <div>
+                                    <span>Nivel 3:</span>
+                                </div>
+                                <div>
+                                    <span>Valor comisionable: $ </span>
+                                    <t t-esc="'{:,.2f}'.format(total_nivel3_comisionable)"/>
+                                </div>
+                                <div>
+                                    <span>Valor comisión: $ </span>
+                                    <t t-esc="'{:,.2f}'.format(total_nivel3_comision)"/>
+                                </div>
+                                <hr/>
+                            </div>
+                            <div t-if="total_nivel4_comisionable">
+                                <div>
+                                    <span>Nivel 4:</span>
+                                </div>
+                                <div>
+                                    <span>Valor comisionable: $ </span>
+                                    <t t-esc="'{:,.2f}'.format(total_nivel4_comisionable)"/>
+                                </div>
+                                <div>
+                                    <span>Valor comisión: $ </span>
+                                    <t t-esc="'{:,.2f}'.format(total_nivel4_comision)"/>
+                                </div>
+                                <hr/>
+                            </div>
+                            <div t-if="total_nivel5_comisionable">
+                                <div>
+                                    <span>Nivel 5:</span>
+                                </div>
+                                <div>
+                                    <span>Valor comisionable: $ </span>
+                                    <t t-esc="'{:,.2f}'.format(total_nivel5_comisionable)"/>
+                                </div>
+                                <div>
+                                    <span>Valor comisión: $ </span>
+                                    <t t-esc="'{:,.2f}'.format(total_nivel5_comision)"/>
+                                </div>
+                                <hr/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+</odoo>

@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_mhel_comisiones_comisiones_wizard,comisiones_wizard,mhel_comisiones.model_comisiones_wizard,base.group_user,1,1,1,1
+access_mhel_comisiones_comision,comisiones_comision,mhel_comisiones.model_comisiones_comision,base.group_user,1,1,1,1
+access_mhel_comisiones_nivel_tmp,comisiones_nivel_tmp,mhel_comisiones.model_comisiones_nivel_tmp,base.group_user,1,1,1,1
+access_mhel_comisiones_periodo,comisiones_periodo,mhel_comisiones.model_comisiones_periodo,base.group_user,1,1,1,1
+access_mhel_comisiones_porcentaje,comisiones_porcentaje,mhel_comisiones.model_comisiones_porcentaje,base.group_user,1,1,1,1
+access_mhel_comisiones_liquidacion_wizard,comisiones_liquidacion_wizard,mhel_comisiones.model_comisiones_liquidacion_wizard,base.group_user,1,1,1,1
+
+access_wizard_reporte_comision,access.wizard.reporte.comision,model_wizard_reporte_comision,base.group_user,1,1,1,1

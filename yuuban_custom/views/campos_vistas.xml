@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+        <record id="res_partner_cw_ventas_view" model="ir.ui.view">
+        <field name="name">res_partner_cw_ventas_view.add.field</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='vat']" position="after">
+                <field name="iddist"/>
+            </xpath>
+        </field>
+        </record>
+</odoo>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="wizard_reporte_comision_form_view" model="ir.ui.view">
+        <field name="name">wizard.reporte.comision</field>
+        <field name="model">wizard.reporte.comision</field>
+        <field name="arch" type="xml">
+            <form string="Comisiones">
+                <group>
+                    <group>
+                        <field name="periodo_id"
+                               required="1"
+                               options="{'no_open': True, 'no_create': True}"/>
+                    </group>
+                </group>
+                <footer>
+                    <button string="Aceptar" class="btn-primary" type="object" name="generar_reporte"/>
+                    <button string="Cerrar" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="portal_my_home_menu_guest" name="Portal layout : guest menu entries"
+        inherit_id="portal.portal_breadcrumbs" priority="30">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+
+            <li t-if="guest" class="breadcrumb-item ">
+                <t t-esc="route_guests" />
+            </li>
+        </xpath>
+    </template>
+
+    <template id="portal_my_guests" name="Mi Red">
+        <style type="text/css">
+            @media only screen and (max-width: 500px) {
+            #div_periodo_largo {
+            display: none !important;
+            }
+            #div_totales_largo {
+            display: none !important;
+            }
+            #div_periodo_alto {
+            display: block !important;
+            }
+            #div_totales_alto {
+            display: block !important;
+            }
+            }
+        </style>
+        <meta content="width=device-width, initial-scale=1" name="viewport" />
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True" />
+            <t t-call="portal.portal_searchbar" />
+            <t t-if="not invitados_ids">
+                <p>Actualmente no cuenta con contactos en la red de la plataforma.</p>
+            </t>
+            <t t-else="">
+                <div class="table-responsive border rounded border-top-0"
+                    style="background-color: white;">
+                    <div style="padding-top: 15px; font-size: 14px;">
+                        <div style="padding: 0 25px 0 25px;">
+                            <form action="/my/guests" method="post">
+                                <input type="hidden" name="periodo_id" t-att-value="periodo_id"
+                                    id="periodo_id" />
+                                <div class="d-flex justify-content-center" id="div_periodo_largo">
+                                    <span
+                                        style="font-size: 25px; font-weight: bold; padding-right: 20px;">
+                                        Período</span>
+                                    <select class="form-control"
+                                        style="width: 50%; display: inline;"
+                                        onchange="cambio_periodo()" id="periodos_dropdown">
+                                        <t t-foreach="comisiones" t-as="comision">
+                                            <option t-att-value="comision"
+                                                t-att-selected="comision == periodo_id">
+                                                <t t-out="comisiones[comision]" />
+                                            </option>
+                                        </t>
+                                    </select>
+                                    <button href="#" type="submit" role="button"
+                                        class="btn btn-primary a-submit"
+                                        style="margin-left: 20px;">Actualizar</button>
+                                </div>
+                                <div class="my-3 row" style="font-size: 30px;"
+                                    id="div_totales_largo">
+                                    <div class="col-6 text-right">
+                                        <div>
+                                            <span>Total ventas:</span>
+                                        </div>
+                                        <div>
+                                            <span>Total comisionable:</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-2 text-right">
+                                        <div>
+                                            <t t-esc="total_ventas"
+                                                t-options="{'widget': 'monetary', 'display_currency': (company_id or res_company).currency_id}" />
+                                        </div>
+                                        <div>
+                                            <t t-esc="total_comisionable"
+                                                t-options="{'widget': 'monetary', 'display_currency': (company_id or res_company).currency_id}" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="content-data" class="my-3">
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </t>
+        <script> let data_init = `<t t-esc="subordinados['subordinado']" />`; </script>
+        <script src="/mhel_comisiones/static/src/js/test.js"></script>
+    </template>
+
+    <template id="portal_my_guests_sale" name="Red" customize_show="True"
+        inherit_id="sale.portal_my_home_sale" priority="10">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Red</t>
+                <t t-set="url" t-value="'/my/guests'" />
+                <t t-set="placeholder_count" t-value="'guests_count'" />
+            </t>
+        </xpath>
+    </template>
+
+</odoo>

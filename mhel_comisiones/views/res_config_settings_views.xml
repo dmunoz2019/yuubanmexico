@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="sale_res_config_settings_view_form_inherit_mhel_comisiones" model="ir.ui.view">
+        <field name="name">sale.res.config.settings.view.form.inherit.mhel.comisiones</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="sale.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='connectors_setting_container']" position="after">
+                <h2 class="mt32">Comisiones</h2>
+                <div class="row mt16 o_settings_container">
+
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_left_pane"/>
+                        <div class="o_setting_right_pane">
+                            <label for="comisiones_valor_meta"/>
+                            <div class="text-muted">
+                                Valor mínimo de ventas para aplicar a comisiones
+                            </div>
+                            <div class="text-muted">
+                                <field name="comisiones_valor_meta"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_left_pane"/>
+                        <div class="o_setting_right_pane">
+                            <label for="comisiones_primer_nivel"/>
+                            <div class="text-muted">
+                                Valor de porcentaje de la comisión para el primer nivel
+                            </div>
+                            <div class="text-muted">
+                                <field name="comisiones_primer_nivel" class="oe_inline"/> %
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_left_pane"/>
+                        <div class="o_setting_right_pane">
+                            <label for="comisiones_segundo_nivel"/>
+                            <div class="text-muted">
+                                Valor de porcentaje de la comisión para el segundo nivel
+                            </div>
+                            <div class="text-muted">
+                                <field name="comisiones_segundo_nivel" class="oe_inline"/> %
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_left_pane"/>
+                        <div class="o_setting_right_pane">
+                            <label for="comisiones_tercer_nivel"/>
+                            <div class="text-muted">
+                                Valor de porcentaje de la comisión para el tercer nivel
+                            </div>
+                            <div class="text-muted">
+                                <field name="comisiones_tercer_nivel" class="oe_inline"/> %
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_left_pane"/>
+                        <div class="o_setting_right_pane">
+                            <label for="comisiones_cuarto_nivel"/>
+                            <div class="text-muted">
+                                Valor de porcentaje de la comisión para el cuarto nivel
+                            </div>
+                            <div class="text-muted">
+                                <field name="comisiones_cuarto_nivel" class="oe_inline"/> %
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_left_pane"/>
+                        <div class="o_setting_right_pane">
+                            <label for="comisiones_quinto_nivel"/>
+                            <div class="text-muted">
+                                Valor de porcentaje de la comisión para el quinto nivel
+                            </div>
+                            <div class="text-muted">
+                                <field name="comisiones_quinto_nivel" class="oe_inline"/> %
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="view_users_form_inherit_gexin_custom" model="ir.ui.view">
+        <field name="name">view.users.form.inherit.gexin.custom</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet//notebook//page[@name='access_rights']" position="inside">
+                <group col="2">
+                    <field name="default_warehouse_id" options="{'no_create':True, 'no_open': True}"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
