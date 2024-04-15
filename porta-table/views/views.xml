@@ -1,0 +1,50 @@
+<odoo>
+  <odoo>
+    <data>
+        <!-- Inherit the existing template -->
+        <template id="portal_my_quotations_inherited" inherit_id="mhel_comisiones.portal_my_guests">
+            <!-- Target the end of the portal_table or the no quotations message -->
+            <xpath expr="//form" position="after">
+                <!-- Add custom content here -->
+                <div class="mt-2">
+                    <table class="table rounded mb-0 bg-white o_portal_my_doc_table">
+
+                      <thead>
+                          <tr class="active">
+                              <th>Acumulado</th>
+                                <th class="text-end">Nivel 1</th>
+                              <th>Acumulado</th>
+                              <th class="text-end">Nivel 2</th>
+                              <th>Acumulado</th>
+                              <th class="text-end">Nivel 3</th>
+                              <th>Acumulado</th>
+                              <th class="text-end">Nivel 4</th>
+                              <th>Acumulado</th>
+                              <th class="text-end">Nivel 5</th>
+                                <th>Total</th>
+
+
+                          </tr>
+                      </thead>
+                          <tbody><tr>
+                                <td class="">$10,000</td>
+                                <td class="text-end">$1,000</td>
+                              <td class="">$10,000</td>
+                                <td class="text-end">$1,000</td>
+                              <td class="">$10,000</td>
+                                <td class="text-end">$1,000</td>
+                              <td class="">$10,000</td>
+                                <td class="text-end">$1,000</td>
+                              <td class="">$10,000</td>
+                                <td class="text-end">$1,000</td>
+                                </tr>
+
+                  </tbody></table>
+                </div>
+            </xpath>
+            <!-- Optionally, handle the case where there are no quotations -->
+
+        </template>
+    </data>
+</odoo>
+</odoo>
