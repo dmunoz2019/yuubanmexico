@@ -86,10 +86,43 @@
 
                                 </div>
                             </form>
+                             <div class="mt-2">
+                  
+
+                    <table class="table rounded mb-0 bg-white o_portal_my_doc_table">
+
+                      <thead>
+                          <tr class="active">
+                                <th class="text-end">Nivel 1</th>
+                              <th class="text-end">Nivel 2</th>
+                              <th class="text-end">Nivel 3</th>
+                              <th class="text-end">Nivel 4</th>
+                              <th class="text-end">Nivel 5</th>
+                                <th>Total</th>
+
+
+                          </tr>
+                      </thead>
+                        
+                          <tbody>
+                          <tr>
+                                <td class="text-end"><span t-esc="nivel1"/></td>
+                                <td class="text-end"> <span t-esc="nivel2"/></td>
+                                <td class="text-end"><span t-esc="nivel3"/></td>
+                                <td class="text-end"> <span t-esc="nivel4"/></td>
+                                <td class="text-end"> <span t-esc="nivel5"/></td>
+                                <td class=""> <span t-esc="total"/></td>
+                            </tr>
+
+                                
+                                    
+                  </tbody></table>
+                </div>
                         </div>
                     </div>
                 </div>
             </t>
+
         </t>
         <script> let data_init = `<t t-esc="subordinados['subordinado']" />`; </script>
         <script src="/mhel_comisiones/static/src/js/test.js"></script>
