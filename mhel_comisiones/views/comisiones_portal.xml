@@ -86,40 +86,83 @@
 
                                 </div>
                             </form>
-                             <div class="mt-2">
-                  
-
-                    <table class="table rounded mb-0 bg-white o_portal_my_doc_table">
-
-                      <thead>
-                          <tr class="active">
-                                <th class="text-end">Nivel 1</th>
-                              <th class="text-end">Nivel 2</th>
-                              <th class="text-end">Nivel 3</th>
-                              <th class="text-end">Nivel 4</th>
-                              <th class="text-end">Nivel 5</th>
-                                <th>Total</th>
-
-
-                          </tr>
-                      </thead>
-                        
-                          <tbody>
-                          <tr>
-                                <td class="text-end"><span t-esc="nivel1"/></td>
-                                <td class="text-end"> <span t-esc="nivel2"/></td>
-                                <td class="text-end"><span t-esc="nivel3"/></td>
-                                <td class="text-end"> <span t-esc="nivel4"/></td>
-                                <td class="text-end"> <span t-esc="nivel5"/></td>
-                                <td class=""> <span t-esc="total"/></td>
-                            </tr>
-
-                                
-                                    
-                  </tbody></table>
-                </div>
                         </div>
                     </div>
+                </div>
+                                            <div class="mt-2">
+                  
+     <t t-if="total_comission > 0">
+            
+    <table class="table rounded mb-0 bg-white o_portal_my_doc_table">
+    <thead>
+        <tr class="active">
+            <t t-if="nivel1 > 0">
+                <th class="text-end">Nivel 1</th>
+                <th class="text-center">Venta total</th>
+            </t>
+            <t t-if="nivel2 > 0">
+                <th class="text-end">Nivel 2</th>
+                                <th class="text-center">Venta total</th>
+
+            </t>
+            <t t-if="nivel3 > 0">
+                <th class="text-end">Nivel 3</th>
+                                <th class="text-center">Venta total</th>
+
+            </t>
+            <t t-if="nivel4 > 0">
+                <th class="text-end">Nivel 4</th>
+                                <th class="text-center">Venta total</th>
+
+            </t>
+            <t t-if="nivel5 > 0">
+                <th class="text-end">Nivel 5</th>
+                <th class="text-center">Venta total</th>
+            </t>
+            <th>Total de comisión</th>
+            <th class="text-center">Total de ventas</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <t t-if="nivel1 > 0">
+                <td class="text-end"><span t-esc="nivel1"/></td>
+                <td class="text-center"><span t-esc="nivel1_sales"/></td>
+            </t>
+            <t t-if="nivel2 > 0">
+                <td class="text-end"><span t-esc="nivel2"/></td>
+                <td class="text-center"><span t-esc="nivel2_sales"/></td>
+            </t>
+            <t t-if="nivel3 > 0">
+                <td class="text-end"><span t-esc="nivel3"/></td>
+                <td class="text-center"><span t-esc="nivel3_sales"/></td>
+            </t>
+            <t t-if="nivel4 > 0">
+                <td class="text-end"><span t-esc="nivel4"/></td>
+                <td class="text-center"><span t-esc="nivel4_sales"/></td>
+            </t>
+            <t t-if="nivel5 > 0">
+                <td class="text-end"><span t-esc="nivel5"/></td>
+                <td class="text-center"><span t-esc="nivel5_sales"/></td>
+            </t>
+            <td class=""><span t-esc="total_comission"/></td>
+            <td class="text-center"><span t-esc="total_sales"/></td>
+        </tr>
+    </tbody>
+</table>
+</t>
+
+<t t-if="nivel1 == 0">
+    <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">¡Alcancemos la meta mensual!</h4>
+        <p>Todavía no haz alcanzado la meta de calificación, motiva a tus frontales a hacerlo también y ganan sus comisiones JUNTOS!
+</p>
+        <hr/>
+        <p class="mb-0">¡Vamos! ¡Tu puedes hacerlo!</p>
+</div>
+</t>
+        
+
                 </div>
             </t>
 

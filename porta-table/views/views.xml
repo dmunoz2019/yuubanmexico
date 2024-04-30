@@ -6,12 +6,15 @@
             <!-- Target the end of the portal_table or the no quotations message -->
             <xpath expr="//form" position="after">
                 <!-- Add custom content here -->
-                <div class="mt-2">
+                
+    <!-- <div class="mt-2">
+
+
                     <table class="table rounded mb-0 bg-white o_portal_my_doc_table">
 
                       <thead>
                           <tr class="active">
-                              <th>Acumulado</th>
+                              <th>Acumulado 3</th>
                                 <th class="text-end">Nivel 1</th>
                               <th>Acumulado</th>
                               <th class="text-end">Nivel 2</th>
@@ -40,10 +43,10 @@
                                 </tr>
 
                   </tbody></table>
-                </div>
+                </div> -->
+                <div class="o_porta_table"/>    
             </xpath>
             <!-- Optionally, handle the case where there are no quotations -->
-
         </template>
     </data>
 </odoo>
