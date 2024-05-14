@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_contract_form" name="Contrato">
+        <t t-call="portal.portal_layout">
+            
+              
+            <div class="container mt16 mb16">
+                <div class="page-header">
+                    <h1>Solicitud para Distribuidor Independiente</h1>
+                    <p>Porfavor ingrese los datos solicitados en el siguiente formulario.</p>
+                </div>
+                <form id="distributor_form" model="res.users" t-att-action="'/contract-submitted'">
+                    <t t-if="user.iddist">
+                        <section class="mb8">
+                            <label>Número de Identificación:</label>
+                            <input type="text" id="identification_number" name="identification_number" t-att-value="user.iddist" readonly="readonly" class="form-control"/>
+                        </section>
+                    </t>
+                    <section class="mb8">
+                        <label>Datos del Distribuidor Independiente:</label>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control mb4" name="last_name_father" placeholder="Apellido Paterno" />
+                                <input type="text" class="form-control mb4" name="last_name_mother" placeholder="Apellido Materno"/>
+                                <input type="text" class="form-control" name="first_name" placeholder="Nombre(s)" />
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control mb4" name="city" placeholder="Ciudad" />
+                                <input type="text" class="form-control mb4" name="state" placeholder="Estado"/>
+                                <input type="date" class="form-control mb4" name="birth_date" placeholder="Fecha de Nacimiento" />
+                                <select name="country_id" id="country_id" class="form-control" context="{'lang': 'en_US'}">
+                                    <option value="">Seleccione un país</option>
+                                    <t t-foreach="countries" t-as="country" context="{'lang': 'en_US'}">
+                                        <option t-att-value="country.id"><t t-esc="country.name" context="{'lang': 'en_US'}"/></option>
+                                    </t>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control mb4" name="address" placeholder="Dirección" />
+                                <input type="text" class="form-control mb4" name="zip_code" placeholder="Código Postal" />
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control mb4" name="phone" placeholder="Teléfono" />
+                                <input type="email" class="form-control mb4" name="email" placeholder="E-mail" />
+                                <input type="text" class="form-control" name="rfc" placeholder="R.F.C." />
+                            </div>
+                        </div>
+                    </section>
+                    <section class="mb8">
+                        <div class="accordion" id="accordionExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingOne">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        <label>Términos y Condiciones:</label>
+                                    </button>
+                                </h2>
+                                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        <div class="container mt-5">
+                                            <div class="text-justify">
+                                                <h2>ACEPTO LOS TÉRMINOS A CONTINUACIÓN ESTABLECIDOS:</h2>
+                                                <ol>
+                                                    <li>Soy un Distribuidor totalmente Independiente y no un agente, ni empleado, ni representante legal de la Compañia y, como tal seré responsable de mi propio negocio.</li>
+                                                    <li>Acepto las Políticas de YUUBAN HERBAL NATURA S. DE R.L. DE C.V. (de las cuales recibo copia en este momento) y a cualquier otro cambio subsecuente que me sea notificado por esta Compañia para protección de intereses mutuos.</li>
+                                                    <li>Toda forma de publicidad y material impreso deberán ser revisados y aprobados por la Compañía antes de usarse.</li>
+                                                    <li>El distribuidor Independiente deberá ser mayor de 18 años.</li>
+                                                    <li>La presente solicitud es de naturaleza Mercantil, aclarando ser para Distribuidores Independientes, sin dar origen a una relación Obrero - patronal, de ahí que se regirá en lo que no estuviere pactado por las disposiciones del Código de Comercio, El solicitante Certifica que ha leído el Contrato indicado en el reverso de esta forma y estamos de acuerdo en regirnos por las cláusulas, políticas de la compañía y señalamientos indicados.</li>
+                                                    <li>Solicito que el importe de los pagos relacionados con el presente contrato me sean depositados a la cuenta:</li>
+                                                </ol>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" />
+                                                    <label class="form-check-label" for="defaultCheck1">
+                                                        Acepto los términos y condiciones
+                                                    </label>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </section>
+                    <section class="mb8 mt8">
+                        <label>Información de Pago:</label>
+<!--                        <input type="text" class="form-control mb4" name="bank_name" placeholder="Banco" />-->
+                        <select name="bank_id" id="bank_id" class="form-control" context="{'lang': 'en_US'}">
+                                    <option value="">Seleccione un Banco</option>
+                                    <t t-foreach="banks" t-as="bank" context="{'lang': 'en_US'}">
+                                        <option t-att-value="bank.id"><t t-esc="bank.name" context="{'lang': 'en_US'}"/></option>
+                                    </t>
+                                </select>
+                        <input type="text" class="form-control mb4" name="acc_holder_name" placeholder="Nombre del Titular de la Cuenta" />
+                        <input type="text" class="form-control mb4" name="acc_number" placeholder="Número de Cuenta" />
+                        <input type="text" class="form-control mb4" name="branch" placeholder="Sucursal" />
+                        <input type="text" class="form-control mb4" name="card_number" placeholder="Número de Tarjeta"/>
+                        <input type="text" class="form-control" name="clabe" placeholder="Clabe Interbancaria" />
+                        <div class="alert alert-warning mt8 " role="alert">
+                            Me obligo a informar a <strong> YUUBAN HERBAL NATURA S. DE R.L. DE C.V. </strong> cualquier cambio en él número de cuenta, liberando a la misma de toda
+                            responsabilidad por cualquier cambio en el número de cuenta NO notificado con oportunidad.
+                        </div>
+
+                    </section>
+
+                    <t t-if="user.name">
+                        <t t-set="name_parts" t-value="user.name.split()"/>
+                        <t t-if="len(name_parts) >= 3">
+                            <t t-set="sponsor_last_name_father" t-value="name_parts[0]"/>
+                            <t t-set="sponsor_last_name_mother" t-value="name_parts[1]"/>
+                            <t t-set="sponsor_first_name" t-value="name_parts[2]"/>
+                            <!-- Mostrar solo si se encuentran todos los nombres -->
+                            <section class="mb8">
+                                <label>Datos del Distribuidor Patrocinador:</label>
+                                <input type="text" class="form-control mb4" name="sponsor_last_name_father" t-att-value="sponsor_last_name_father" readonly="readonly" />
+                                <input type="text" class="form-control mb4" name="sponsor_last_name_mother" t-att-value="sponsor_last_name_mother" readonly="readonly"/>
+                                <input type="text" class="form-control" name="sponsor_first_name" t-att-value="sponsor_first_name" readonly="readonly"/>
+                            </section>
+                        </t>
+                        <t t-else="">
+                            <t t-set="sponsor_last_name_father" t-value="''"/>
+                            <t t-set="sponsor_last_name_mother" t-value="''"/>
+                            <t t-set="sponsor_first_name" t-value="''"/>
+                        </t>
+                    </t>
+                    <t t-else="">
+                        <t t-set="sponsor_last_name_father" t-value="''"/>
+                        <t t-set="sponsor_last_name_mother" t-value="''"/>
+                        <t t-set="sponsor_first_name" t-value="''"/>
+                    </t>
+
+
+
+                    <section class="mb8">
+                        <!-- lets create an accordion to collapse de contract, this elements should not be the same from the previous -->
+                        <div class="accordion" id="accordionExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                    <div>
+                                        <button class="accordion-button w-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                            <label>Contrato:</label>
+                                           <!--  lets add a check box independent of the button  -->
+                                        
+                                        </button>
+                                    </div>
+
+                                    
+                                     <!-- lets add a check box inside the accordion to accept the contract -->
+                                     
+                                </h2>
+                                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        <div class="container mt-5">
+                                            <div class="text-justify">
+                                                <h1 class="text-center mb-4">Contrato Marco de Compra-Venta a Precio de Mayoreo</h1>
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <strong>Entre: YUUBAN HERBAL NATURA, S. DE R.L. DE C.V. (el "Vendedor") y el DISTRIBUIDOR INDEPENDIENTE (el "Distribuidor")</strong>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">Declaraciones</h5>
+                                                        <p class="text-justify">
+                                                            1. Declara “YUUBAN” por conducto de su Representante Legal, ser una sociedad constituida de acuerdo con la Ley General de Sociedades Mercantiles y demás leyes en vigor aplicables para los Estados Unidos Mexicanos, tener su domicilio en la Ciudad de Irapuato Guanajuato, el cual se encuentra detallado al anverso de este Contrato, que se dedica entre otras actividades a la venta y distribución de Suplementos Alimenticios, Remedios Herbolarios y Cosméticos, productos que se encuentran identificados en el Anexo “A” de este contrato, y que en lo sucesivo se denominarán “los productos” dicho anexo forma parte integrante del presente contrato.
+                                                        </p>
+                                                        <p class="text-justify">
+                                                            2. Por su parte el “DISTRIBUIDOR INDEPENDIENTE” declara: a) Que se encuentra inscrito en el registro Federal de Contribuyentes y estar al corriente de sus obligaciones fiscales. b) Que cuenta con la experiencia necesaria, así como con elementos propios para dedicarse al comercio en general.
+                                                        </p>
+                                                        <h5 class="card-title">Cláusulas</h5>
+                                                        <p class="text-justify">
+                                                            PRIMERA. – Los otorgantes convienen en que para viabilizar la compra-venta, materia de este Contrato es requisito indispensable y de procedencia que el “DISTRIBUIDOR” este registrado como Distribuidor Independiente ante “YUUBAN”.
+                                                        </p>
+                                                        <p class="text-justify">
+                                                            SEGUNDA. – En consecuencia, el “DISTRIBUIDOR” en este acto solicita a “YUUBAN” ser registrado como Distribuidor Independiente para la República Mexicana y “YUUBAN” en este acto acepta dicha solicitud e inscribe al solicitante como “DISTRIBUIDOR INDEPENDIENTE” directamente de “YUUBAN”.
+                                                        </p>
+                                                        <p class="text-justify">
+                                                            TERCERA. - Precios- Los precios por pedido de cada Producto serán cotizados por “YUUBAN” de acuerdo a sus listas de precios y vigentes a las fechas de pago de los pedidos respectivos y a las cantidades mínimas por pedido las cuales podrá modificar libremente. La totalidad de dichos precios y cantidades mínimas por pedido están sujetas a cambio por “YUUBAN”.
+                                                        </p>
+                                                        <p class="text-justify">
+                                                            CUARTA. – El “DISTRIBUIDOR” se obliga a respetar el precio de comercialización de los productos establecidos por “YUUBAN” por lo que le está estrictamente prohibido comercializar los productos por debajo de los precios establecidos por “YUUBAN”.
+                                                        </p>
+                                                        <p class="text-justify">
+                                                            QUINTA. – El “DISTRIBUIDOR” que manifieste tener otros negocios que le permiten vivir, determinará a su entera disposición, las horas, las fechas, la periodicidad y los lugares donde promoverá la comercialización y venta de productos, siempre que no compita directamente con la venta directa de los productos que “YUUBAN” le proporciona.
+                                                        </p>
+                                                        <p class="text-justify">
+                                                            SEXTA. – Todos los gastos propios e inherentes a la venta de los productos, así como a los impuestos que puedan originarse como resultado de las actividades del “DISTRIBUIDOR” derivadas del presente contrato, serán por cuenta de este y se compromete a cumplir con las disposiciones legales aplicables.
+                                                        </p>
+                                                        <p class="text-justify">
+                                                            SEPTIMA. – Para que “YUUBAN” considere activo al “DISTRIBUIDOR” es necesario que el “DISTRIBUIDOR” realice una compra de por lo menos $500.00 M.N. durante cuatro meses consecutivos, de lo contrario, será causa de rescisión de este contrato, deslindando a “YUUBAN” de toda obligación que compareciera hacia el “DISTRIBUIDOR”.
+                                                        </p>
+                                                        <p class="text-justify">
+                                                            OCTAVA. –  Cesión – Los derechos y deberes del “DISTRIBUIDOR” conforme a este Contrato no podrán ser cedidos en todo o en parte, a persona física o moral sin el consentimiento expreso, previo y por escrito de “YUUBAN”.
+                                                        </p>
+                                                        <p class="text-justify">
+                                                            NOVENA. – Los otorgantes pactan las siguientes definiciones: A.- Bonificación: Es el bono hecho por “YUUBAN” a favor del “DISTRIBUIDOR” sobre las compras efectuadas por los Distribuidores Independientes que integran su red haciéndose acreedor al mismo, siempre y cuando el “DISTRIBUIDOR” (1) se encuentre en un nivel superior al Distribuidor Independiente de su red, (2) haya adquirido consumo mínimo mensual de $3500 M.N. y (3) esté actuando de acuerdo a las políticas vigentes de la compañía.
+                                                        </p>
+                                                        <p class="text-justify">
+                                                            B.- Distribuidor Independiente; Es la persona que se encuentra inscrita en los registros de “YUUBAN” con todos los derechos y obligaciones que derivan de este instrumento contractual. Y que además invita y registra ante “YUUBAN” como Distribuidor Independiente a otras personas que deseen formar parte de su red multinivel.
+                                                        </p>
+                                                        <p class="text-justify">
+                                                            C. – Multinivel: Es la estructura que se forma con motivo del registro ante “YUUBAN” de los Distribuidores Independientes.
+                                                        </p>
+                                                        <p class="text-justify">
+                                                            D. – Generación: Es la sucesión de Distribuidores Independientes que descienden en la línea recta del Distribuidor Independiente que los inscribió en su red multinivel.
+                                                        </p>
+                                                        <p class="text-justify">
+                                                            E. – Productos: Se entenderá aquellos artículos manufacturados, vendidos y/o comercializados ahora en el futuro por “YUUBAN”.
+                                                        </p>
+                                                        <p class="text-justify">
+                                                            DÉCIMA. – El “DISTRIBUIDOR” podrá participar a su elección en los programas de entrenamiento de ventas y “YUUBAN” impartirá entrenamientos internos concebidos para asegurar el desarrollo e implementación de métodos de ventas y distribución efectivos aplicables a los Productos y a la red de Distribución Independiente.
+                                                        </p>
+                                                        <p class="text-justify">
+                                                            DÉCIMA PRIMERA. – El “DISTRIBUIDOR” podrá incrementar su red de distribución independiente bajo su propio patrocinio invitando a otras personas que deseen actuar como distribuidores independientes de “YUUBAN” de acuerdo a las Políticas para “DISTRIBUIDORES INDEPENDIENTES” y demás reglas que libremente fije el vendedor.
+                                                        </p>
+                                                        <p class="text-justify">
+                                                            DÉCIMA SEGUNDA. – Toda vez que las políticas de la Compañía establecen porcentajes de bonificación progresivas “YUUBAN” llevara un registro de las compras que mensualmente efectué el “DISTRIBUIDOR” y su red con el fin de determinar el volumen de compras mensuales y poder establecer el monto de las bonificaciones mismas que serán depositadas vía transferencia bancaria después de los primeros cinco días del mes siguiente a la compra de los productos, es decir, las bonificaciones por las compras del mes de enero serán enviadas después del 5 de febrero.
+                                                        </p>
+                                                        <p class="text-justify">
+                                                            DÉCIMA TERCERA. – El “DISTRIBUIDOR” está obligado a expedir la correspondiente factura por los bonos recibidos, misma que deberá reunir los requisitos fiscales que las leyes determinen.
+                                                        </p>
+                                                        <p class="text-justify">
+                                                            DÉCIMA CUARTA. – Cuando la entrega del Producto sea mediante servicio de mensajería en el domicilio que indique el “DISTRIBUIDOR”, deberá de inspeccionar todos los productos de inmediato al recibirlos para verificar que no haya faltantes o productos dañados, mismos que deberá reclamar en dicho momento ante el representante de mensajería, quien verificara tal situación, la entrega se realizara de acuerdo con la disponibilidad de los productos y existencias. Quedando expresamente convenido que “YUUBAN” no será responsable por los retrasos que tenga el servicio de mensajería.
+                                                        </p>
+                                                        <p class="text-justify">
+                                                            DÉCIMA QUINTA. – Pago- Antes de que se le surta o entregue cada pedido, el “DISTRIBUIDOR” deberá pagar el importe de sus compras por medio de un depósito en efectivo en la cuenta bancaria que “YUUBAN” determine, pudiendo ser mediante giro bancario, cheque certificado, cheque de caja o cualquier otro medio de pago que “YUUBAN” autorice por escrito. “YUUBAN” se reserva el derecho de abstenerse de surtir los pedidos que le requiera el “DISTRIBUIDOR” hasta que este no acredite haber realizado el pago mediante la exhibición del recibo correspondiente y salvo buen cobro.
+                                                        </p>
+                                                        <p class="text-justify">
+                                                            DÉCIMA SEXTA. – “YUUBAN” tendrá el derecho, en cualquier momento y sin responsabilidad alguna, de suspender la fabricación, venta o distribución de cualquiera de los productos y modificar las especificaciones y presentaciones de los mismos, en virtud de sus derechos intelectuales e industriales en las marcas y patentes de “YUUBAN”. Si existiera algún pedido del “DISTRIBUIDOR” pendiente de surtir por “YUUBAN” que incluya cualquiera de los productos cuya fabricación hubiere sido modificada, “YUUBAN”, con el consentimiento del “DISTRIBUIDOR”, surtirá el producto con productos equivalentes.
+                                                        </p>
+                                                        <p class="text-justify">
+                                                            DÉCIMA SÉPTIMA. – El “DISTRIBUIDOR” admite y reconoce por este medio que no tiene derecho alguno sobre las marcas registradas, logos, avisos comerciales y los nombres de los productos de “YUUBAN”. Y se compromete a respetar los derechos de autor y los derechos industriales, literarios y artísticos de “YUUBAN” relacionados con sus publicaciones, incluyendo documentos escritos o audiovisuales y no está autorizado para reproducirlos en parte o en su totalidad sin el consentimiento previo y por escrito de “YUUBAN” ni tampoco podrá publicar u ordenar la publicidad de cualquier artículo escrito que ilustre el concepto de ventas de “YUUBAN” o describa cualquier característica o uso de los productos.
+                                                        </p>
+                                                        <p class="text-justify">
+                                                            DÉCIMA OCTAVA. – El “DISTRIBUIDOR” no utilizará ni proporcionará a sus clientes material alguno que no sea proporcionado o aprobado por escrito por “YUUBAN”. Asimismo, el “DISTRIBUIDOR” no podrá utilizar sin el consentimiento previo y por escrito de “YUUBAN” el nombre de “YUUBAN”, logo y avisos comerciales en cualquier medio de propaganda, ya sea impreso o electrónico, incluyendo de forma enunciativa mas no limitativa carteles, lonas, folletos, volantes, calcomanías, publicaciones en redes sociales hasta en tanto esta no apruebe su publicidad y lo oriente para no transgredir las leyes aplicables.
+                                                        </p>
+                                                        <p class="text-justify">
+                                                            DÉCIMA NOVENA. – Además de las obligaciones adquiridas por el “DISTRIBUIDOR” con motivo del presente Contrato, este acepta expresamente conocer y estar de acuerdo con las Políticas de la Compañía de “YUUBAN”, por lo que acepta cumplir fielmente con las mismas. “YUUBAN” se reserva el derecho de modificar dichas políticas cuando así lo estime conveniente, en cuyo caso comunicará al “DISTRIBUIDOR” el texto de las modificaciones que implante.
+                                                        </p>
+                                                        <p class="text-justify">
+                                                            VIGÉSIMA. – El “DISTRIBUIDOR” se obliga a mantener a “YUUBAN” a salvo de cualquier reclamación de terceros que surja de actos u omisiones imputables al “DISTRIBUIDOR” y a reembolsar a “YUUBAN” cualquier cantidad de dinero en su caso, que esta tuviera que cubrir con motivo de tales reclamaciones incluyendo los gastos legales.
+                                                        </p>
+                                                        <p class="text-justify">
+                                                            VIGÉSIMA PRIMERA. – Queda expresamente entendido que la relación que se establece en virtud de este Contrato es de carácter meramente mercantil, por lo que entre las partes no existe ninguna relación de subordinación u obrero patronal, si no única y exclusivamente la de compra-venta de los productos. Por lo que el “DISTRIBUIDOR” no es mandatario ni representante ni empleado del vendedor, y no se ostentará como tal, no podrá contraer obligación, ya sea expresa o tácita, a nombre del vendedor. En virtud de lo anterior, cada una de las partes asume, por su propia cuenta y riesgo, cualquier responsabilidad en que pudiera incurrir como resultado del incumplimiento de este Contrato o de cualquier otro convenio o compromiso con tercero.
+                                                        </p>
+                                                        <p class="text-justify">
+                                                            VIGÉSIMA SEGUNDA. – El término de este contrato será voluntario para ambas partes, mismo que concluirá mediante aviso dado por escrito a la otra en forma indubitable cuando menos con diez días hábiles de anticipación sin necesidad de declaración judicial y sin responsabilidad alguna por la parte que haya dado el aviso de rescisión, independientemente de la liquidación de las operaciones pendientes.
+                                                        </p>
+                                                        <p class="text-justify">
+                                                            VIGÉSIMA TERCERA. – Si “YUUBAN” no ejercita ningún o algunos de los derechos que corresponden en virtud del presente Contrato, no significará la renuncia de su parte para ejercitarlos plenamente en la forma y tiempo que considere más conveniente.
+                                                        </p>
+                                                        <p class="text-justify">
+                                                            VIGÉSIMA CUARTA. – Las notificaciones que se deben efectuar o dar conforme a este contrato se harán por escrito y se enviarán por correo certificado con porte pagado, telefax o telegrama a las direcciones indicadas al reverso del presente contrato. Cualquier parte tendrá derecho a cambiar su dirección mediante aviso por escrito, que, si se transmite de la manera mencionada en este inciso, surtirá efecto a los diez (10) días siguientes a la fecha en que se considere efectuado dicho aviso.
+                                                        </p>
+                                                        <p class="text-justify">
+                                                            VIGÉSIMA QUINTA. – Este contrato sobresee y cancela todo convenio anteriormente habido, en su caso, entre las partes, y no se podrá reformar, alterar ni cambiar excepto por medio de un convenio por escrito suscrito por ambas partes.
+                                                        </p>
+                                                        <p class="text-justify">
+                                                            VIGÉSIMA SEXTA. – Información Confidencial- El “DISTRIBUIDOR” conviene en no divulgar a persona alguna durante un periodo de cinco (5) años a partir de la terminación de este contrato cualquier información relativa a clientes o mercados, sistema de comercialización, políticas del vendedor o a la composición, fabricación o desarrollo de los productos o en general cualquier información que el vendedor divulgue en confianza al “DISTRIBUIDOR” y así mismo, en no usar dicha información para fin alguno distinto que no sea el cumplimiento de este contrato.
+                                                        </p>
+                                                        <p class="text-justify">
+                                                            VIGÉSIMA SÉPTIMA. – Si alguna de las estipulaciones de este contrato fuera declarada nula o sin efecto legal mediante sentencia judicial o resolución de autoridad competente, las demás estipulaciones no dejarán por ello de tener pleno valor y vigencia. Lo no previsto en el presente contrato las partes se someten a lo dispuesto por el Código de Comercio y supletoriamente por lo dispuesto en el Código Civil del Estado de Guanajuato.
+                                                        </p>
+                                                        <p class="text-justify">
+                                                            VIGÉSIMA OCTAVA. – Para todo asunto relativo a la interpretación o al cumplimiento de este contrato, las partes se someten a los tribunales competentes de Irapuato, Guanajuato, renunciando en forma expresa a cualquier otro fuero de jurisdicción que les pudiera corresponder o al que pudieran tener derecho por cualquier motivo.
+                                                        </p>
+                                                        <!-- Agregar el resto de las cláusulas aquí, siguiendo el mismo patrón. -->
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group mb8">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" />
+                                                    <label class="form-check label" for="defaultCheck2">
+                                                        Acepto los términos y condiciones
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </section>
+                    <section class="mb8">
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </section>
+
+
+
+
+                </form>
+            </div>
+
+            <script type="text/javascript" src="/web/static/lib/jquery/jquery.js"></script>
+            <script type="text/javascript">
+                
+                $(document).ready(function(){
+                    <!-- lets create an schema for validation -->
+                    var schema = {
+                        "last_name_father": {
+                            required: true,
+                            type: "string",
+                            minLength: 1
+                        },
+                        "first_name": {
+                            required: true,
+                            type: "string",
+                            minLength: 1
+                        },
+                        "city": {
+                            required: true,
+                            type: "string",
+                            minLength: 1
+                        },
+                        "birth_date": {
+                            required: true,
+                            type: "string",
+                            pattern: /^\d{4}-\d{2}-\d{2}$/, // Asegura formato YYYY-MM-DD
+                        },
+                        "country_id": {
+                            required: true,
+                            type: "string",
+                            minLength: 1
+                        },
+                        "address": {
+                            required: true,
+                            type: "string",
+                            minLength: 1
+                        },
+                        "zip_code": {
+                            required: true,
+                            type: "string",
+                            pattern: /^\d{5}$/ // Código postal de 5 dígitos
+                        },
+                        "phone": {
+                            required: true,
+                            type: "string",
+                            pattern: /^\+?(\d{10,12})$/ // Teléfono, permite opcionalmente un + inicial, seguido de 10 a 12 dígitos
+                        },
+                        "email": {
+                            required: true,
+                            type: "string",
+                            pattern: /^[^@]+@[^@]+\.[^@]+$/ // Patrón básico para email
+                        },
+                        "rfc": {
+                            required: true,
+                            type: "string",
+                            pattern: /^([A-ZÑ&amp;]{3,4})\d{6}([A-Z\d]{3})$/ // Patrón para RFC
+                        },
+                        "account_number": {
+                            required: true,
+                            type: "string",
+                            minLength: 10,
+                            maxLength: 18 
+                        },
+                        "clabe": {
+                            required: true,
+                            type: "string",
+                            pattern: /^\d{18}$/ // CLABE es un número de 18 dígitos
+                        }
+                    };                    
+
+                    <!-- lets create a function to validate the form  and output the the problem in the console -->
+                    function validateForm() {
+                        var form = document.getElementById("distributor_form");
+                        var elements = form.elements;
+                        var errors = [];
+                        for (var i = 0; i &lt; elements.length; i++) {
+                            var element = elements[i];
+                            var name = element.name;
+                            var value = element.value;
+                            var schemaItem = schema[name];
+                            if (schemaItem) {
+                                if (schemaItem.required &amp;&amp; value.length == 0) {
+                                    errors.push({message: "El campo " + name + " es requerido", element: element});
+                                }
+                                if (schemaItem.minLength &amp;&amp; value.length &lt; schemaItem.minLength) {
+                                    errors.push({message: "El campo " + name + " debe tener al menos " + schemaItem.minLength + " caracteres", element: element});
+                                }
+                            }
+                        }
+                    
+                        <!-- if (errors.length &gt; 0) {                         
+                            displayToasts(errors);
+                        } -->
+                    }
+                   
+                    
+                    document.getElementById("distributor_form").addEventListener("submit", function(event){
+                        event.preventDefault();
+                        validateForm();
+                        this.submit();
+                    });
+
+                                    
+                });
+            </script>
+
+         
+        </t>
+    </template>
+
+</odoo> 
