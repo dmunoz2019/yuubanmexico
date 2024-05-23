@@ -10,6 +10,7 @@
             <field name="padding">3</field>
             <field name="company_id" eval="False"/>
         </record>
+        
         <record id="seq_sheet_commision" model="ir.sequence">
             <field name="name">Sheet Commision</field>
             <field name="code">sheet.commision</field>

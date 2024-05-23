@@ -3,7 +3,16 @@
     <template id="portal_contract_form" name="Contrato">
         <t t-call="portal.portal_layout">
             
+              <style>
               
+              label.error{
+                    color: red;
+                    font-size: 12px;
+                    display: block;
+                    font-weight : 700;
+              }
+              
+              </style>
             <div class="container mt16 mb16">
                 <div class="page-header">
                     <h1>Solicitud para Distribuidor Independiente</h1>
@@ -20,15 +29,15 @@
                         <label>Datos del Distribuidor Independiente:</label>
                         <div class="row">
                             <div class="col-md-6">
-                                <input type="text" class="form-control mb4" name="last_name_father" placeholder="Apellido Paterno" />
-                                <input type="text" class="form-control mb4" name="last_name_mother" placeholder="Apellido Materno"/>
-                                <input type="text" class="form-control" name="first_name" placeholder="Nombre(s)" />
+                                <input type="text" class="form-control mb4" name="last_name_father" placeholder="Apellido Paterno" required="required" oninvalid="this.setCustomValidity('Por favor, llena este campo.')" oninput="this.setCustomValidity('')" />
+                                <input type="text" class="form-control mb4" name="last_name_mother" placeholder="Apellido Materno" required="required" oninvalid="this.setCustomValidity('Por favor, llena este campo.')" oninput="this.setCustomValidity('')" />
+                                <input type="text" class="form-control" name="first_name" placeholder="Nombre(s)" required="required" oninvalid="this.setCustomValidity('Por favor, llena este campo.')" oninput="this.setCustomValidity('')" />
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control mb4" name="city" placeholder="Ciudad" />
-                                <input type="text" class="form-control mb4" name="state" placeholder="Estado"/>
-                                <input type="date" class="form-control mb4" name="birth_date" placeholder="Fecha de Nacimiento" />
-                                <select name="country_id" id="country_id" class="form-control" context="{'lang': 'en_US'}">
+                                <input type="text" class="form-control mb4" name="city" placeholder="Ciudad" required="required" oninvalid="this.setCustomValidity('Por favor, llena este campo.')" oninput="this.setCustomValidity('')" />
+                                <input type="text" class="form-control mb4" name="state" placeholder="Estado" required="required" oninvalid="this.setCustomValidity('Por favor, llena este campo.')" oninput="this.setCustomValidity('')"/>
+                                <input type="date" class="form-control mb4" name="birth_date" placeholder="Fecha de Nacimiento" required="required" oninvalid="this.setCustomValidity('Por favor, llena este campo.')" oninput="this.setCustomValidity('')" />
+                                <select name="country_id" id="country_id" class="form-control" context="{'lang': 'en_US'}" required="required"  oninvalid="this.setCustomValidity('Por favor, llena este campo.')" oninput="this.setCustomValidity('')" >
                                     <option value="">Seleccione un país</option>
                                     <t t-foreach="countries" t-as="country" context="{'lang': 'en_US'}">
                                         <option t-att-value="country.id"><t t-esc="country.name" context="{'lang': 'en_US'}"/></option>
@@ -38,13 +47,13 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <input type="text" class="form-control mb4" name="address" placeholder="Dirección" />
-                                <input type="text" class="form-control mb4" name="zip_code" placeholder="Código Postal" />
+                                <input type="text" class="form-control mb4" name="address" placeholder="Dirección" required="required" oninvalid="this.setCustomValidity('Por favor, llena este campo.')" oninput="this.setCustomValidity('')" />
+                                <input type="text" class="form-control mb4" name="zip_code" placeholder="Código Postal" required="required" oninvalid="this.setCustomValidity('Por favor, llena este campo.')" oninput="this.setCustomValidity('')" />
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control mb4" name="phone" placeholder="Teléfono" />
-                                <input type="email" class="form-control mb4" name="email" placeholder="E-mail" />
-                                <input type="text" class="form-control" name="rfc" placeholder="R.F.C." />
+                                <input type="text" class="form-control mb4" name="phone" placeholder="Teléfono" required="required" oninvalid="this.setCustomValidity('Por favor, llena este campo.')" oninput="this.setCustomValidity('')" />
+                                <input type="email" class="form-control mb4" name="email" placeholder="E-mail" required="required" oninvalid="this.setCustomValidity('Por favor, llena este campo.')" oninput="this.setCustomValidity('')" />
+                                <input type="text" class="form-control" name="rfc" placeholder="R.F.C." required="required" oninvalid="this.setCustomValidity('Por favor, llena este campo.')" oninput="this.setCustomValidity('')" />
                             </div>
                         </div>
                     </section>
@@ -56,7 +65,7 @@
                                         <label>Términos y Condiciones:</label>
                                     </button>
                                 </h2>
-                                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                <div id="collapseOne" class="accordion-collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                     <div class="accordion-body">
                                         <div class="container mt-5">
                                             <div class="text-justify">
@@ -70,9 +79,9 @@
                                                     <li>Solicito que el importe de los pagos relacionados con el presente contrato me sean depositados a la cuenta:</li>
                                                 </ol>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group" id = "terms_conditions">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" />
+                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" required="required"  />  
                                                     <label class="form-check-label" for="defaultCheck1">
                                                         Acepto los términos y condiciones
                                                     </label>
@@ -153,7 +162,7 @@
                                      <!-- lets add a check box inside the accordion to accept the contract -->
                                      
                                 </h2>
-                                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                <div id="collapseTwo" class="accordion-collapse show" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                                     <div class="accordion-body">
                                         <div class="container mt-5">
                                             <div class="text-justify">
@@ -267,15 +276,14 @@
                                                         <p class="text-justify">
                                                             VIGÉSIMA OCTAVA. – Para todo asunto relativo a la interpretación o al cumplimiento de este contrato, las partes se someten a los tribunales competentes de Irapuato, Guanajuato, renunciando en forma expresa a cualquier otro fuero de jurisdicción que les pudiera corresponder o al que pudieran tener derecho por cualquier motivo.
                                                         </p>
-                                                        <!-- Agregar el resto de las cláusulas aquí, siguiendo el mismo patrón. -->
                                                     </div>
 
                                                 </div>
 
                                             </div>
-                                            <div class="form-group mb8">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" />
+                                            <div class="form-group mb8" id = "contract_form">
+                                                <div class="form-check" > 
+                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" required="required"  name = "defaultCheck2" oninvalid="this.setCustomValidity('Por favor, llena este campo.')" oninput="this.setCustomValidity('')" />
                                                     <label class="form-check label" for="defaultCheck2">
                                                         Acepto los términos y condiciones
                                                     </label>
@@ -300,13 +308,14 @@
                 </form>
             </div>
 
-            <script type="text/javascript" src="/web/static/lib/jquery/jquery.js"></script>
-            <script type="text/javascript">
-                
-                $(document).ready(function(){
-                    <!-- lets create an schema for validation -->
-                    var schema = {
-                        "last_name_father": {
+           <script type="text/javascript" src="/web/static/lib/jquery/jquery.js"></script>
+           <script type="text/javascript" src="/client_qr/static/lib/jquery.validate.min.js"></script>
+
+
+        <script type="text/javascript">
+            $(document).ready(function(){
+    var schema = {
+         "last_name_father": {
                             required: true,
                             type: "string",
                             minLength: 1
@@ -324,7 +333,7 @@
                         "birth_date": {
                             required: true,
                             type: "string",
-                            pattern: /^\d{4}-\d{2}-\d{2}$/, // Asegura formato YYYY-MM-DD
+                            minLength: 1
                         },
                         "country_id": {
                             required: true,
@@ -339,74 +348,83 @@
                         "zip_code": {
                             required: true,
                             type: "string",
-                            pattern: /^\d{5}$/ // Código postal de 5 dígitos
+                            minLength: 1
                         },
                         "phone": {
                             required: true,
                             type: "string",
-                            pattern: /^\+?(\d{10,12})$/ // Teléfono, permite opcionalmente un + inicial, seguido de 10 a 12 dígitos
+                            minLength: 1
                         },
                         "email": {
                             required: true,
                             type: "string",
-                            pattern: /^[^@]+@[^@]+\.[^@]+$/ // Patrón básico para email
+                            minLength: 1
                         },
                         "rfc": {
                             required: true,
                             type: "string",
-                            pattern: /^([A-ZÑ&amp;]{3,4})\d{6}([A-Z\d]{3})$/ // Patrón para RFC
+                            minLength: 1
                         },
-                        "account_number": {
-                            required: true,
-                            type: "string",
-                            minLength: 10,
-                            maxLength: 18 
-                        },
-                        "clabe": {
-                            required: true,
-                            type: "string",
-                            pattern: /^\d{18}$/ // CLABE es un número de 18 dígitos
-                        }
-                    };                    
 
-                    <!-- lets create a function to validate the form  and output the the problem in the console -->
-                    function validateForm() {
-                        var form = document.getElementById("distributor_form");
-                        var elements = form.elements;
-                        var errors = [];
-                        for (var i = 0; i &lt; elements.length; i++) {
-                            var element = elements[i];
-                            var name = element.name;
-                            var value = element.value;
-                            var schemaItem = schema[name];
-                            if (schemaItem) {
-                                if (schemaItem.required &amp;&amp; value.length == 0) {
-                                    errors.push({message: "El campo " + name + " es requerido", element: element});
-                                }
-                                if (schemaItem.minLength &amp;&amp; value.length &lt; schemaItem.minLength) {
-                                    errors.push({message: "El campo " + name + " debe tener al menos " + schemaItem.minLength + " caracteres", element: element});
-                                }
-                            }
-                        }
-                    
-                        <!-- if (errors.length &gt; 0) {                         
-                            displayToasts(errors);
-                        } -->
-                    }
-                   
-                    
-                    document.getElementById("distributor_form").addEventListener("submit", function(event){
-                        event.preventDefault();
-                        validateForm();
-                        this.submit();
-                    });
+    }
 
-                                    
-                });
-            </script>
+    function validateForm(form, schema) {
+        # lets insert a label for the error message inside the element that has the error
+
+        var isValid = true;
+        for (var key in schema) {
+            var value = form[key].value;
+            var rules = schema[key];
+            if (rules.required &amp;&amp; !value) {
+                isValid = false;
+                form[key].insertAdjacentHTML('afterend', '<label class="error">Por favor, llena este campo.</label>');
+            }
+            if (rules.minLength &amp;&amp; value.length &lt; rules.minLength) {
+                isValid = false;
+                form[key].insertAdjacentHTML('afterend', '<label class="error">Por favor, llena este campo.</label>');
+            }
+        }
+        return isValid;
+    }
+
+
+    $('#distributor_form').submit(function(e){
+        e.preventDefault();
+        var form = e.target;
+        var isValid = validateForm(form, schema);
+        if (isValid) {
+            form.submit();
+        }
+
+    });
+
+});
+
+             
+               
+            </script> 
+
+
+            
 
          
         </t>
     </template>
+
+      <template id="portal_contract_submitted" name="Contrato Enviado">
+        <t t-call="portal.portal_layout">
+            <div class="container mt16 mb16">
+                <div class="page-header">
+                    <h1>Contrato </h1>
+                    <p>Gracias por enviar tu solicitud de contrato <t t-esc="data['first_name']"/>,  en breve uno de nuestros colaboradores se pondrá en contacto contigo.</p>
+                </div>
+            </div>
+            
+        </t>
+
+
+    </template>
+
+<!--  -->
 
 </odoo> 

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- lets inherith the sever side template portal_layout -->
+
+
+   <template id="portal_layout_inherit" inherit_id="portal.portal_layout">
+    <xpath expr="//div[@class='o_portal_my_details']" position="inside">
+        <div class="container">
+            <!-- Crear un elemento de imagen QR descargable -->
+            <div class="row">
+                <div class="col-sm-6">
+                    <h4>QR Code</h4>
+                    <img t-attf-src="data:image/png;base64,#{user_id.qr_code}" class="img-fluid" alt="QR Code" id="user_qr" />
+                </div>
+            </div>
+        </div>
+
+        <!-- style para aparecer un label encima de el qr usando su id-->
+        <style>
+            #user_qr {
+                cursor: pointer;
+                position: relative;
+            }
+        </style>
+
+
+        <!-- Descargar el QR al hacer clic -->
+        <script type="text/javascript">
+
+        <!-- cuando se hace hover en la imagen se mueve y aparece un label que diga contenido descargable -->
+            document.getElementById('user_qr').addEventListener('mouseover', function() {
+                var label = document.createElement('label');
+                label.innerHTML = 'Descargar';
+                label.style.position = 'absolute';
+                label.style.top = '50%';
+                label.style.left = '50%';
+                label.style.transform = 'translate(-50%, -50%)';
+                label.style.color = 'Red';
+                label.style.fontSize = '20px';
+                label.style.fontWeight = 'bold';
+                label.style.textShadow = '2px 2px 4px #000000';
+                label.style.zIndex = '0';
+                document.getElementById('user_qr').style.position = 'relative';
+                document.getElementById('user_qr').style.zIndex = '1';
+                document.getElementById('user_qr').style.filter = 'brightness(50%)';
+                document.getElementById('user_qr').appendChild(label);
+            });
+
+            document.getElementById('user_qr').addEventListener('mouseout', function() {
+                document.getElementById('user_qr').removeChild(document.getElementById('user_qr').lastChild);
+                document.getElementById('user_qr').style.filter = 'brightness(100%)';
+            });
+
+            
+            
+            document.getElementById('user_qr').addEventListener('click', function() {
+                var a = document.createElement('a');
+                a.href = document.getElementById('user_qr').src;
+                a.download = 'qr_code.png';
+                a.click();
+            });
+
+
+        </script>
+    </xpath>
+</template>
+
+
+</odoo>
