@@ -1,0 +1,55 @@
+<odoo>
+    <data>
+    <record id="view_sale_badge_form" model="ir.ui.view">
+        <field name="name">Sale badge Form View</field>
+        <field name="model">sale.badge</field>
+        <field name="arch" type="xml">
+        <form class="oe_form">
+            <header>
+                <group>
+
+                <field name="badge_image" class="oe_inline mt16"  />
+
+            </group>
+            </header>
+    <sheet>
+        <group>
+            <div class="oe_title">
+            <group>
+                   <h1>
+                <field name="name" class="oe_inline"/>
+            </h1>
+            </group>
+
+        </div>
+
+        </group>
+
+
+
+        <group class="oe_form_group_row">
+            <group class="oe_form_group_col_6">
+                <field name="date_start" widget="date"/>
+                <field name="date_end" widget="date"/>
+                <field name="description"/>
+            </group>
+            <group class="oe_form_group_col_6">
+                <field name="priority" widget="priority"/>
+                <field name="state"/>
+                <field name="user_id" widget="many2one" options="{'no_create': True}"/>
+                <field name="stage_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                <field name="label_ids" widget="many2many_tags" options="{'no_create': True}"/>
+            </group>
+        </group>
+    </sheet>
+     <div class="oe_chatter">
+        <field name="message_follower_ids" widget="mail_followers"/>
+        <field name="activity_ids" widget="mail_activity"/>
+        <field name="message_ids" widget="mail_thread"/>
+    </div>
+</form>
+
+        </field>
+    </record>
+    </data>
+</odoo>

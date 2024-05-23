@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+   <record id="view_user_badge_pivot" model="ir.ui.view">
+          <field name="name">User badge Pivot View</field>
+        <field name="model">user.badge</field>
+        <field name="arch" type="xml">
+            
+        <pivot>
+            <field name='name' type='col'/>
+            <field name='date_start' type='row'/>
+            <field name='state' type='col'/>
+        </pivot>
+        </field>
+    </record>
+    </data>
+</odoo>

@@ -1,0 +1,28 @@
+<odoo>
+    <data>
+   <record id="view_user_badge_search" model="ir.ui.view">
+          <field name="name">User badge Search View</field>
+        <field name="model">user.badge</field>
+        <field name="arch" type="xml">
+            
+        <search>
+            <field name='name'/>
+            <field name='date_start'/>
+            <field name='date_end'/>
+            <field name='priority'/>
+            <field name='state'/>
+            <field name='user_id'/>
+            <group string="Group By">
+                <filter string="By Date Start" name="date_start" domain="[]" context="{'group_by': 'date_start'}"/>
+                <filter string="By State" name="state" domain="[]" context="{'group_by': 'state'}"/>
+                <filter string="By User" name="user_id" domain="[]" context="{'group_by': 'user_id'}"/>
+            </group>
+            <group string="Order By">
+                <filter string="By Priority" name='priority' domain="[]" context="{'order': 'priority'}"/>
+                <filter string="By Create Date" name='create_date' domain="[]" context="{'order': 'create_date desc'}"/>
+            </group>
+        </search>
+        </field>
+    </record>
+    </data>
+</odoo>

@@ -1,0 +1,40 @@
+<odoo>
+    <data>
+    <record id="view_sale_badge_kanban" model="ir.ui.view">
+                <field name="name">Sale badge Kanban View</field>
+        <field name="model">sale.badge</field>
+        <field name="arch" type="xml">
+            
+        <kanban class="o_kanban_mobile" 
+            sample="1"
+            default_group_by="state"
+            js_class= "project_task_kanban"
+          >
+                <field name="name"/>
+                <field name="description"/>
+                <field name="state"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <div class="row">
+                                <div class="col-12">
+                                    <strong>
+                                        <field name="name"/>
+                                    </strong>
+                                </div>
+                            </div>
+                            <t t-if="record.description.value">
+                                <hr class="mt8 mb8"/>
+                                <field name="description"/>
+                            </t>
+                            <div>
+                                <field name="state"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    </data>
+</odoo>

@@ -1,0 +1,15 @@
+<odoo>
+    <data>
+   <record id="view_user_badge_graph" model="ir.ui.view">
+          <field name="name">User badge Graph View</field>
+        <field name="model">user.badge</field>
+        <field name="arch" type="xml">
+            
+        <graph>
+            <field name='name' type='bar'/>
+            <field name='state' type='pie'/>
+        </graph>
+        </field>
+    </record>
+    </data>
+</odoo>

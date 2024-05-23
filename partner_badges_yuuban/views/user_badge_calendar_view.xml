@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+   <record id="view_user_badge_calendar" model="ir.ui.view">
+       <field name="name">User badge Calendar View</field>
+        <field name="model">user.badge</field>
+        <field name="arch" type="xml">
+            
+        <calendar string="Calendar View" date_start="date_start" date_stop="date_end" color="state">
+            <field name='name'/>
+        </calendar>
+        </field>
+    </record>
+    </data>
+</odoo>

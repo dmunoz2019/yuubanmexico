@@ -1,0 +1,51 @@
+<odoo>
+
+    <record id="action_sale_badge" model="ir.actions.act_window">
+        <field name="name">Sale Badge Action</field>
+        <field name="res_model">sale.badge</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_user_badge" model="ir.actions.act_window">
+        <field name="name">User Badge Action</field>
+        <field name="res_model">user.badge</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_sale_badge_server" model="ir.actions.server">
+        <field name="name">Sale Badge Action Server</field>
+        <field name="model_id" ref="model_sale_badge"/>
+        <field name="state">code</field>
+        <field name="code">
+        action = {
+                "type": "ir.actions.act_window",
+                "view_mode": "tree",
+                "res_model": model._name,
+              }
+        </field>
+    </record>
+
+    <record id="action_user_badge_server" model="ir.actions.server">
+        <field name="name">User Badge Action Server</field>
+        <field name="model_id" ref="model_user_badge"/>
+        <field name="state">code</field>
+        <field name="code">
+        action = {
+                "type": "ir.actions.act_window",
+                "view_mode": "tree",
+                "res_model": model._name,
+              }
+        </field>
+    </record>
+<menuitem id="menu_partner_badges_yuuban" name="Partner Badges Yuuban" sequence="1"/>
+
+    <menuitem id="menu_sale_badge" name="Sale Badge"
+              parent="menu_partner_badges_yuuban"
+              action="action_sale_badge"
+              sequence="1"/>
+
+    <menuitem id="menu_user_badge" name="User Badge"
+              parent="menu_partner_badges_yuuban"
+              action="action_user_badge"
+              sequence="1"/>
+</odoo>
