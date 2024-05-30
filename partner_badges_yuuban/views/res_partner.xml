@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
-        <record id="view_res_users_form_inherit_badge" model="ir.ui.view">
-            <field name="name">res.users.form.inherit_badge</field>
-            <field name="model">res.users</field>
+        <record id="view_res_partner_form_inherit_badge" model="ir.ui.view">
+            <field name="name">res.parnter.form.inherit_badge</field>
+            <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_users_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//form/sheet/field[@name='image_1920']" position="before">
+                <xpath expr="//form/sheet/field[@name='image_1920']" position="after">
                         <group class="oe_right oe_avatar_group" name="badge">
                                        <!-- vamos a permitir descargar el qr -->
                                 <field name="top_badge_image" widget="image" class="oe_avatar" options='{"size": [100, 100]}'/>

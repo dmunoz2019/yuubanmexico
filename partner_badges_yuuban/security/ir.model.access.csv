@@ -1,3 +1,8 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 partner_badges_yuuban.access_sale_badge,access_sale_badge,partner_badges_yuuban.model_sale_badge,base.group_user,1,1,1,1
 partner_badges_yuuban.access_user_badge,access_user_badge,partner_badges_yuuban.model_user_badge,base.group_user,1,1,1,1
+partner_badges_yuuban.access_sale_badge_stage,access_sale_badge_stage,partner_badges_yuuban.model_sale_badge_stage,base.group_user,1,1,1,1
+partner_badges_yuuban.access_sale_badge_tag,access_sale_badge_tag,partner_badges_yuuban.model_sale_badge_tag,base.group_user,1,1,1,1
+partner_badges_yuuban.access_user_badge_stage,access_user_badge_stage,partner_badges_yuuban.model_user_badge_stage,base.group_user,1,1,1,1
+partner_badges_yuuban.access_user_badge_tag,access_user_badge_tag,partner_badges_yuuban.model_user_badge_tag,base.group_user,1,1,1,1
+partner_badges_yuuban.access_badge_level,access_badge_level,partner_badges_yuuban.model_badge_level,base.group_user,1,1,1,1

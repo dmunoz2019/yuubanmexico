@@ -6,7 +6,7 @@
     'author': "COMMIT",
     'website': "https://dmunoz2019.github.io/diegoweb/",
     'license': "AGPL-3",
-    'depends': ['base', 'web'],
+    'depends': ['base', 'web', 'mhel_comisiones'],
     'data': [
         'views/contract_form.xml',
         'views/res_users.xml',

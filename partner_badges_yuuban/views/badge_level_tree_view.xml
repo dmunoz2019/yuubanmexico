@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+    <record id="view_badge_level_tree" model="ir.ui.view">
+        <field name="name">badge.level.tree</field>
+        <field name="model">badge.level</field>
+        <field name="arch" type="xml">
+            <tree string="Badge Level">
+                <field name="name"/>
+                <field name="description"/>
+            </tree> 
+        </field>
+    </record>
+    </data>
+</odoo>

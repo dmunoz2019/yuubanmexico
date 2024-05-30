@@ -6,28 +6,25 @@
         <field name="arch" type="xml">
             
         <form class="oe_form">
-    <sheet>
-        <div class="oe_title">
-            <h1>
-                <field name="name" class="oe_inline"/>
-            </h1>
-        </div>
-        <group class="oe_form_group_row">
-            <group class="oe_form_group_col_6">
-                <field name="date_start" widget="date"/>
-                <field name="date_end" widget="date"/>
-                <field name="description"/>
-            </group>
-            <group class="oe_form_group_col_6">
-                <field name="priority" widget="priority"/>
-                <field name="state"/>
-                <field name="user_id" widget="many2one" options="{'no_create': True}"/>
-                <field name="stage_ids" widget="many2many_tags" options="{'no_create': True}"/>
-                <field name="label_ids" widget="many2many_tags" options="{'no_create': True}"/>
-            </group>
-        </group>
-        <!-- ... other fields or elements ... -->
-    </sheet>
+     <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="user_id"/>
+                                <field name="badge_id"/>
+                                <field name="sales_volume"/>
+                                <!-- <field name="period_start"/>
+                                <field name="period_end"/> -->
+                                <field name="level"/>
+                                <field name="priority"/>
+                            </group>
+                            <group>
+                                <field name="badge_image" widget="image"/>
+                                <field name="description"/>
+                            </group>
+                        </group>
+                        
+                    </sheet>
      <div class="oe_chatter">
         <field name="message_follower_ids" widget="mail_followers"/>
         <field name="activity_ids" widget="mail_activity"/>

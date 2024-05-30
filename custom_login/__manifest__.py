@@ -6,12 +6,10 @@
     'author': "Tu Nombre o Empresa",
     'website': "https://tusitio.com",
     'license': "AGPL-3",
-    'depends': ['base', 'web'],
+    'depends': ['base', 'web', 'yuuban_custom' ],
     'data': [
-        # Aquí puedes incluir vistas XML, datos de seguridad, etc.
     ],
     'demo': [
-        # Archivos de datos demo (opcional)
     ],
     'installable': True,
     'application': False,

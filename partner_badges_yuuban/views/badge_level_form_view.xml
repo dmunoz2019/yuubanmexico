@@ -1,0 +1,18 @@
+<odoo>
+    <data>
+    <record id="view_badge_level_form" model="ir.ui.view">
+        <field name="name">badge.level.form</field>
+        <field name="model">badge.level</field>
+        <field name="arch" type="xml">
+            <form string="Badge Level">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    </data>
+</odoo>

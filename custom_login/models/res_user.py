@@ -12,7 +12,7 @@ _logger = logging.getLogger(__name__)
 class ResUsers(models.Model):
     _inherit = 'res.users'
 
-    iddist = fields.Char("Id de Cliente",  related='partner_id.iddist', readonly=False)
+    iddist = fields.Char("Id de Cliente",  related='partner_id.iddist', readonly=False, store=True)
 
     @classmethod
     def _login(cls, db, login, password,user_agent_env):

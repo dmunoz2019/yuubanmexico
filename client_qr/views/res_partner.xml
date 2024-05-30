@@ -7,8 +7,42 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='vat']" position="after">
                 <field name="is_head"/>
+                <field name="birth_date"/>
+
             </xpath>
             
         </field>
     </record>
+
+    <record id="res_partner_contact_head_id_inherit_tree" model="ir.ui.view">
+        <field name="name">res_partner.contact.head.view.tree.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='vat']" position="after">
+                <field name="is_head"/>
+                <field name="birth_date"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- lets insert it in kanban -->
+ <record id="res_partner_contact_head_id_inherit_kanban" model="ir.ui.view">
+        <field name="name">res_partner.contact.head.view.kanban.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.res_partner_kanban_view"/>
+        <field name="arch" type="xml">
+          <xpath expr="//ul" position="inside">
+                    <!-- Insert new fields inside the ul -->
+                    <li t-if="record.is_head.raw_value">
+                        <field name="is_head"/>
+                    </li>
+                    <li t-if="record.birth_date.raw_value">
+                        <field name="birth_date"/>
+                    </li>
+                </xpath>
+        </field>
+    </record>
+
+
 </odoo>

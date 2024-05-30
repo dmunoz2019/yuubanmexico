@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- lets inherith the sever side template portal_layout -->
+
+
+   <template id="portal_layout_inherit_badge" inherit_id="portal.portal_layout">
+    <xpath expr="//div[@class='o_portal_my_details']" position="before">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h4>Insignia</h4>
+                    <img t-attf-src="data:image/png;base64,#{user_id.top_badge_image}" class="img-fluid" alt="Insignia" id="top_badge_image" />
+                </div>
+            </div>
+        </div>
+
+        <style>
+       
+        </style>
+
+
+        <!-- Descargar el QR al hacer clic -->
+        <script type="text/javascript">
++
+
+        </script>
+    </xpath>
+</template>
+
+
+</odoo>

@@ -15,7 +15,7 @@ class Clientes(models.Model):
     # agrega campos a res.partner como informacion adicional de contactos
 
 
-    iddist = fields.Char("Id de Cliente",  default=lambda self: _('New'), readonly=False)
+    iddist = fields.Char("Id de Cliente",  default=lambda self: _('New'), readonly=False, store=True)
     
     @api.model
     def create(self, vals):

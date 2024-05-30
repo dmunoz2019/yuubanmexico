@@ -45,7 +45,9 @@ class MyController(http.Controller):
         return self.create_partner(post, anfitrion)
 
     def create_partner(self, post, anfitrion):
+        bank = None
         partner_verify = request.env['res.partner'].sudo().search([('email', '=', post['email'])])
+        bank_info = " "
         if partner_verify:
             _logging.info(f'Usuario ya existe: {partner_verify}')
             return "Usuario ya existe, por favor espere a ser redirigido a la página anterior"
@@ -70,31 +72,130 @@ class MyController(http.Controller):
             'anfitrion_id': int(anfitrion.id),
 
         })
-        if post.get('bank_id') and post.get('acc_number') and post.get('clabe') and post.get('branch') and post.get('first_name') and post.get('last_name_father') and post.get('last_name_mother'):
-            partner.write({
-                'bank_ids': [(0, 0, {
-                    'bank_id': post['bank_id'],
-                    'acc_number': post['acc_number'],
-                    'l10n_mx_edi_clabe': post['clabe'],
-                    'branch': post['branch'],
-                    'acc_holder_name': f"{post['first_name']} {post['last_name_father']} {post['last_name_mother']}",
-                    'partner_id': partner.id,
-                })],
+        if post.get('bank_id') and post.get('acc_number'):
+            _logging.info(f'Creando cuenta bancaria')
+
+            bank_account = request.env['res.partner.bank'].sudo().create({
+                'acc_number': post['acc_number'],
+                'partner_id': partner.id,
+                'bank_id': bank.id,
             })
+            bank_info = f"""
+            <p class="data-field"><strong>Banco:</strong> {bank.name}</p>
+            <p class="data-field"><strong>Número de Cuenta:</strong> {post['acc_number']}</p>
+            """
+            _logging.info(f'Cuenta bancaria creada: {bank_account}')
 
 
-        portal_user = request.env['res.users'].sudo().create({
-            'login': post['email'],
-            'partner_id': partner.id,
-            'company_id': request.env.company.id,
-            'name': f"{post['first_name']} {post['last_name_father']} {post['last_name_mother']}",
-            'active': True,
-            'groups_id': [(6, 0, [request.env.ref('base.group_portal').id])],
+        # portal_user = request.env['res.users'].sudo().create({
+        #     'login': post['email'],
+        #     'partner_id': partner.id,
+        #     'company_id': request.env.company.id,
+        #     'name': f"{post['first_name']} {post['last_name_father']} {post['last_name_mother']}",
+        #     'active': True,
+        #     'groups_id': [(6, 0, [request.env.ref('base.group_portal').id])],
 
-        })
+        # })
+        # lets create a lead in crm for this partner with the use with the email gaby_corporativo@yuubanmexico.com.mx 
+        # as responsible
 
-        _logging.info(f'Partner creado: {partner}')
+        user_id = request.env['res.users'].sudo().search([('login', '=','nanci_corporativo@yuubanmexico.com.mx')])
 
-        _logging.info(f'Usuario creado: {portal_user}')
+        lead = request.env['crm.lead'].sudo().create(
+            {
+                'partner_id': partner.id,
+                'user_id': user_id.id,
+                'name': f"{post['first_name']} {post['last_name_father']} {post['last_name_mother']} de {post['state']}",
+                'email_from':  post['email'],
+                'phone' : post['phone'],
+                'stage_id': 2,
+                'description': f"""
 
-        return request.redirect('/my')
+                <style>
+                    body {{
+                        font-family: Arial, sans-serif;
+                    }}
+                    .profile {{
+                        margin: 20px;
+                        padding: 20px;
+                        border: 1px solid #000;
+                    }}
+                    .profile h1 {{
+                        text-align: center;
+                        font-size: 24px;
+                    }}
+                    .profile p {{
+                        margin: 10px 0;
+                        font-size: 14px;
+                    }}
+                    .profile .section-title {{
+                        font-weight: bold;
+                        font-size: 18px;
+                        margin-top: 20px;
+                    }}
+                    .profile .data-field {{
+                        margin: 5px 0;
+                    }}
+                </style>
+                       <div class="profile">
+                    <h1>Ficha de Usuario</h1>
+                    <p class="data-field"><strong>Nombre:</strong> {post.get('first_name', 'N/A')} {post.get('last_name_father', '')} {post.get('last_name_mother', '')}</p>
+                    <p class="data-field"><strong>Dirección:</strong> {post.get('address', 'N/A')}</p>
+                    <p class="data-field"><strong>Ciudad:</strong> {post.get('city', 'N/A')}</p>
+                    <p class="data-field"><strong>Estado:</strong> {post.get('state', 'N/A')}</p>
+                    <p class="data-field"><strong>Código Postal:</strong> {post.get('zip_code', 'N/A')}</p>
+                    <p class="data-field"><strong>Teléfono:</strong> {post.get('phone', 'N/A')}</p>
+                    <p class="data-field"><strong>Email:</strong> {post.get('email', 'N/A')}</p>
+                    <p class="data-field"><strong>Número de Identificación:</strong> {post.get('identification_number', 'N/A')}</p>
+                    <p class="data-field"><strong>Fecha de Nacimiento:</strong> {post.get('birth_date', 'N/A')}</p>
+                    <p class="data-field"><strong>RFC:</strong> {post.get('rfc', 'N/A')}</p>
+                    <p class="data-field"><strong>País:</strong> {request.env['res.country'].sudo().browse(int(post.get('country_id', 0))).name if post.get('country_id') else 'N/A'}</p>
+                    <p class="data-field"><strong>Anfitrión ID:</strong> {anfitrion.id}</p>
+                     {bank_info}
+                </div>
+                """
+            }
+        )
+        user_nanci = request.env['res.users'].sudo().search([('login', '=', 'nanci_corporativo@yuubanmexico.com.mx')], limit=1)
+        if not user_nanci:
+            raise ValueError("Usuario 'Nanci Mosqueda' no encontrado.")
+
+        # Creamos una nota en el lead
+        note_content = f"""
+        <p>@{user_nanci.name}</p>
+        <p>Se ha creado una nueva ficha de usuario con los siguientes datos:</p>
+        <ul>
+            <li><strong>Nombre:</strong> {post.get('first_name', 'N/A')} {post.get('last_name_father', '')} {post.get('last_name_mother', '')}</li>
+            <li><strong>Dirección:</strong> {post.get('address', 'N/A')}</li>
+            <li><strong>Ciudad:</strong> {post.get('city', 'N/A')}</li>
+            <li><strong>Estado:</strong> {post.get('state', 'N/A')}</li>
+            <li><strong>Código Postal:</strong> {post.get('zip_code', 'N/A')}</li>
+            <li><strong>Teléfono:</strong> {post.get('phone', 'N/A')}</li>
+            <li><strong>Email:</strong> {post.get('email', 'N/A')}</li>
+            <li><strong>Número de Identificación:</strong> {post.get('identification_number', 'N/A')}</li>
+            <li><strong>Fecha de Nacimiento:</strong> {post.get('birth_date', 'N/A')}</li>
+            <li><strong>RFC:</strong> {post.get('rfc', 'N/A')}</li>
+            <li><strong>País:</strong> {request.env['res.country'].sudo().browse(int(post.get('country_id', 0))).name if post.get('country_id') else 'N/A'}</li>
+            <li><strong>Anfitrión ID:</strong> {anfitrion.id}</li>
+            {bank_info}
+        </ul>
+        """
+            # Creación de la nota
+        lead.message_post(
+            body=note_content,
+            subject="Nueva ficha de usuario creada",
+            message_type='comment',
+            subtype_xmlid='mail.mt_comment',
+            partner_ids=[user_nanci.partner_id.id],
+            email_from=user_nanci.email
+        )
+        
+        user_gaby = request.env['res.users'].sudo().search([('login', '=', 'gaby_corporativo@yuubanmexico.com.mx')], limit=1)
+
+        lead.message_subscribe(partner_ids=[user_gaby.partner_id.id])
+
+
+
+       
+
+        return request.redirect('/')

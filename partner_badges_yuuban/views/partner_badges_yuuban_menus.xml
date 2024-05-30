@@ -5,6 +5,12 @@
         <field name="res_model">sale.badge</field>
         <field name="view_mode">tree,form</field>
     </record>
+        <record id="action_badge_level" model="ir.actions.act_window">
+        <field name="name">Badge level Action</field>
+        <field name="res_model">badge.level</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
 
     <record id="action_user_badge" model="ir.actions.act_window">
         <field name="name">User Badge Action</field>
@@ -37,6 +43,24 @@
               }
         </field>
     </record>
+
+    <record id="action_badge_level_server" model="ir.actions.server">
+        <field name="name">Badge Level Action Server</field>
+        <field name="model_id" ref="model_badge_level"/>
+        <field name="state">code</field>
+        <field name="code">
+        action = {
+                "type": "ir.actions.act_window",
+                "view_mode": "tree",
+                "res_model": model._name,
+              }
+        </field>
+    </record>
+
+
+    
+
+
 <menuitem id="menu_partner_badges_yuuban" name="Partner Badges Yuuban" sequence="1"/>
 
     <menuitem id="menu_sale_badge" name="Sale Badge"
@@ -48,4 +72,10 @@
               parent="menu_partner_badges_yuuban"
               action="action_user_badge"
               sequence="1"/>
+    
+    <menuitem id="menu_badge_level" name="Badge Level"
+                parent="menu_partner_badges_yuuban"
+                action="action_badge_level"
+                sequence="1"/>
+
 </odoo>

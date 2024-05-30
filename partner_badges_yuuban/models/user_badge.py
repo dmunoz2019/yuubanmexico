@@ -9,8 +9,8 @@ class UserBadge(models.Model):
     badge_id = fields.Many2one('sale.badge', string='Badge', required=True)
     badge_image = fields.Binary(string='Imagen del Badge', related='badge_id.badge_image')
     sales_volume = fields.Float(string='Volumen de Ventas', required=True)
-    period_start = fields.Date(string='Inicio del Período', required=True)
-    period_end = fields.Date(string='Fin del Período', required=True)
+    period_start = fields.Date(string='Inicio del Período', required=False)
+    period_end = fields.Date(string='Fin del Período', required=False)
     date_start = fields.Date("Start Date")
     date_end = fields.Date("End Date")
     description = fields.Text("Description")
@@ -18,6 +18,8 @@ class UserBadge(models.Model):
     state = fields.Selection([('draft', 'Draft'), ('open', 'Open'), ('done', 'Done')], string='State', default='draft')
     stage_ids = fields.One2many('user.badge.stage', 'user_badge_id', string='User badge Stages')
     label_ids = fields.Many2many('user.badge.tag', 'user_badge_tag_rel', 'tag_id', 'user_badge_ids', string='User badge Tags')
+    level = fields.Char(string='Nivel', related='badge_id.level', store=True, readonly=False)
+    level_id = fields.Many2one('badge.level', string='Level', related='badge_id.level_id', store=True, readonly=False)
 
 class UserBadgeStage(models.Model):
     _name = 'user.badge.stage'
